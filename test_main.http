@@ -1,11 +1,21 @@
-# Test your FastAPI endpoints
+### 获取新闻分类
+GET {{url}}/api/news/categories?page=3&size=3
+Accept: */*
+Cache-Control: no-cache
 
-GET http://127.0.0.1:8000/
-Accept: application/json
+### 获取新闻列表
+GET {{url}}/api/news/list?categoryId=2&page=2&size=3
+Accept: */*
+Cache-Control: no-cache
 
-###
+### 创建用户
+POST {{url}}/api/users/register
+Accept: */*
+Cache-Control: no-cache
+Content-Type:  application/json
 
-GET http://127.0.0.1:8000/hello/User
-Accept: application/json
-
-###
+{
+  "username": "七月的极光",
+  "nickname": "太阳之子",
+  "password": "112"
+}
