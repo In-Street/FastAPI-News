@@ -18,6 +18,7 @@ sessionmaker = async_sessionmaker(
 	expire_on_commit=False,
 )
 
+
 # 创建依赖项，用于路由函数获取数据库会话
 async def get_session():
 	async with sessionmaker() as session:
@@ -26,4 +27,5 @@ async def get_session():
 			await session.commit()
 		except Exception as e:
 			await session.rollback()
-			raise HTTPException(status_code=500, detail=str(e))
+		# raise HTTPException(status_code=500, detail=str(e))  # 此处不要统一抛出HTTPException，否则全局统一异常处理中的其他类型的异常拦截不了
+			raise e

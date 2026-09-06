@@ -1,5 +1,5 @@
 """
-	通用响应格式
+	通用成功响应格式
 """
 from typing import Optional
 

@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
+from config.exception_conf import  global_exception_registry
 from routers.news_router import new_router
 from routers.user_router import user_router
 
@@ -21,3 +22,6 @@ app.add_middleware(
 	allow_methods=["*"],  # 允许的请求方法
 	allow_headers=["*"],  # 允许的请求头
 )
+
+#全局异常处理器
+global_exception_registry(app)

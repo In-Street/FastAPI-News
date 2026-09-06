@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 
 from pydantic import BaseModel, Field, ConfigDict
@@ -15,19 +16,25 @@ class UserInfoBase(BaseModel):
 	"""
 	nickname: Optional[str] = Field(..., max_length=50, description="昵称")
 	avatar: Optional[str] = Field(max_length=255)
-	gender: Optional[str] = Field(max_length=1)
+	gender: Optional[str] = Field(None,max_length=1)
+	expires_at: Optional[datetime] = Field(None,alias="expiresAt")
 
 
 class UserInfoResponse(UserInfoBase):
 	"""
 		用户信息，必填属性
 	"""
-	id: int
+	id: int = Field(...,alias="userId")
 	username: str
 
 	model_config = ConfigDict(
+		populate_by_name=True,  # alias/字段名的兼容
 		from_attributes=True,
 	)
+
+	def __repr__(self):
+		return f'<{self.__class__.__name__} id={self.id} username={self.username}>'
+
 
 
 class UserResponse(BaseModel):
@@ -38,3 +45,7 @@ class UserResponse(BaseModel):
 		populate_by_name=True,  # alias/字段名的兼容
 		from_attributes=True, # 允许从 orm对象中取值。当从数据库中获取到模型类后需要转成pydantic类，通过 UserResponse.model_validate(模型类) 来转换
 	)
+
+class UpdateUserInfoRequest(BaseModel):
+	nickname: Optional[str] = Field(None,max_length=10)
+	avatar: str = Field(None,max_length=20)

@@ -19,3 +19,27 @@ Content-Type:  application/json
   "nickname": "太阳之子",
   "password": "112"
 }
+
+### 根据token获取用户信息
+GET {{url}}/api/users/get_user_by_token
+Accept: */*
+Cache-Control: no-cache
+Authorization: Bearer 48cdf85a-c663-4f62-95c2-37fd6b653f1f
+
+### 根据token获取用户信息-2
+GET {{url}}/api/users/get_user_by_token_2
+Accept: */*
+Cache-Control: no-cache
+Authorization: Bearer ddedafd4-41b6-4833-a224-34c40b80c08a
+
+### 更新用户信息
+POST {{url}}/api/users/update_user_info
+Accept: */*
+Cache-Control: no-cache
+Content-Type:  application/json
+Authorization: Bearer ddedafd4-41b6-4833-a224-34c40b80c08a
+
+{
+  "avatar": "http://def",
+  "nickname": "太阳之子_3"
+}
